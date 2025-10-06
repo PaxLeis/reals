@@ -107,11 +107,12 @@
       let query = input.value.trim();
       if (!query) return;
 
-      // Construct the target URL
-      const targetUrl = `https://realweb-sand.vercel.app/embed.html#https://${encodeURIComponent(query)}`;
+      // Construct the URL for embedding
+      const encodedQuery = encodeURIComponent(query);
+      const embedUrl = `https://realweb-sand.vercel.app/embed.html#https://${encodedQuery}`;
 
-      // Open in a new about:blank window with embedded iframe
-      openEmbedded(targetUrl);
+      // Call function to open in a new 'about:blank' window with iframe
+      openEmbedded(embedUrl);
     }
 
     function openEmbedded(url) {
@@ -119,7 +120,7 @@
       newWindow.document.write(`
         <html>
         <head>
-          <title>Embedded View</title>
+          <title>New Tab</title>
           <style>
             body, html { margin:0; padding:0; height:100%; overflow:hidden; }
             iframe { width:100%; height:100%; border:none; }
