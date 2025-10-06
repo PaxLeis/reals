@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>reals</title>
   <style>
     body {
@@ -87,7 +87,7 @@
 
   <!-- Universal Search Bar -->
   <div class="search-container">
-    <input type="text" id="universalSearch" placeholder="realSEARCH">
+    <input type="text" id="universalSearch" placeholder="realSEARCH" />
     <button onclick="handleSearch()">Go</button>
   </div>
 
@@ -107,20 +107,11 @@
       let query = input.value.trim();
       if (!query) return;
 
-      // Detect if input is a URL or domain
-      let urlPattern = /^(https?:\/\/)/i;
-      let domainPattern = /^[\w-]+\.[a-z]{2,}([\/\w.-]*)*$/i;
+      // Construct the target URL
+      const targetUrl = `https://realweb-sand.vercel.app/embed.html#https://${encodeURIComponent(query)}`;
 
-      if (urlPattern.test(query)) {
-        // Already has https:// or http://
-        openEmbedded(query);
-      } else if (domainPattern.test(query)) {
-        // Plain domain like example.com → prepend https://
-        openEmbedded('https://' + query);
-      } else {
-        // Otherwise, do a Google search
-        window.open(`https://realweb-sand.vercel.app/embed.html#https://duckduckgo.com/?q=search${encodeURIComponent(query)}`, '_blank');
-      }
+      // Open in a new about:blank window with embedded iframe
+      openEmbedded(targetUrl);
     }
 
     function openEmbedded(url) {
@@ -128,9 +119,9 @@
       newWindow.document.write(`
         <html>
         <head>
-          <title>New Tab</title>
+          <title>Embedded View</title>
           <style>
-            body, html { margin:0; height:100%; }
+            body, html { margin:0; padding:0; height:100%; overflow:hidden; }
             iframe { width:100%; height:100%; border:none; }
           </style>
         </head>
@@ -142,9 +133,9 @@
       newWindow.document.close();
     }
 
-    // Allow pressing Enter to search
+    // Trigger search on Enter key
     input.addEventListener('keydown', function(e) {
-      if(e.key === 'Enter') {
+      if (e.key === 'Enter') {
         handleSearch();
       }
     });
