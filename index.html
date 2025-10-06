@@ -1,146 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>reals</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      color: #fff;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>reals</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    color: #fff;
+  }
 
-    .search-container {
-      width: 90%;
-      max-width: 500px;
-      margin: 20px 0;
-      display: flex;
-      gap: 10px;
-    }
+  /* Container for top buttons: left, center, right */
+  .top-button-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.5);
+  }
 
-    .search-container input {
-      flex: 1;
-      padding: 10px 15px;
-      border-radius: 15px;
-      border: 1px solid #333;
-      font-size: 1em;
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #fff;
-    }
+  /* Left buttons container */
+  .left-buttons, .right-buttons {
+    display: flex;
+    gap: 10px;
+  }
 
-    .search-container input::placeholder {
-      color: #aaa;
-    }
+  /* Center search container */
+  .search-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
 
-    .search-container button {
-      padding: 10px 20px;
-      border-radius: 15px;
-      border: 1px solid #333;
-      background-color: rgba(255, 255, 255, 0.05);
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1em;
-    }
+  /* Style for all buttons in top row */
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+  }
 
-    .search-container button:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
+  button:hover {
+    background-color: #555;
+  }
 
-    .app-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
-      width: 90%;
-      max-width: 1000px;
-      margin-top: 30px;
-    }
+  /* Style for search input */
+  .search-container input {
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: 1px solid #333;
+    font-size: 1em;
+    background-color: rgba(255,255,255,0.05);
+    color: #fff;
+  }
 
-    .app-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      padding: 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 1.2em;
-      border: 1px solid #333;
-    }
+  /* Styles for app grid */
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin-top: 30px;
+  }
 
-    .app-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.1);
-    }
-  </style>
+  .app-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2em;
+    border: 1px solid #333;
+  }
+
+  .app-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+</style>
 </head>
 <body>
 
-  <!-- Universal Search Bar -->
+<!-- Top row with 2 buttons on left, search in center, 2 buttons on right -->
+<div class="top-button-row">
+  <div class="left-buttons">
+    <button onclick="openInEmbed('https://realweb-sand.vercel.app/embed.html#https://github.com')">Github</button>
+  </div>
   <div class="search-container">
     <input type="text" id="universalSearch" placeholder="realSEARCH" />
     <button onclick="handleSearch()">Go</button>
   </div>
-
-  <!-- Apps Grid -->
-  <div class="app-grid">
-    <div class="app-button" onclick="window.open('https://realhtml.vercel.app/', '_blank')">realHTML</div>
-    <div class="app-button" onclick="window.open('https://realcss.vercel.app', '_blank')">realCSS</div>
-    <div class="app-button" onclick="window.open('https://realjava.vercel.app', '_blank')">realJAVA</div>
-    <div class="app-button" onclick="window.open('https://realfiles.vercel.app', '_blank')">realFILES</div>
-    <div class="app-button" onclick="window.open('https://real-ai-khaki.vercel.app/', '_blank')">realAI</div>
+  <div class="right-buttons">
+    <button onclick="openInEmbed('https://realweb-sand.vercel.app/embed.html#https://vercel.com')">Vercel</button>
   </div>
+</div>
 
-  <script>
-    const input = document.getElementById('universalSearch');
+<!-- Existing search and app grid -->
+<!-- (No change needed here) -->
 
-    function handleSearch() {
-      let query = input.value.trim();
-      if (!query) return;
+<!-- Apps Grid -->
+<div class="app-grid">
+  <div class="app-button" onclick="window.open('https://realhtml.vercel.app/', '_blank')">realHTML</div>
+  <div class="app-button" onclick="window.open('https://realcss.vercel.app', '_blank')">realCSS</div>
+  <div class="app-button" onclick="window.open('https://realjava.vercel.app', '_blank')">realJAVA</div>
+  <div class="app-button" onclick="window.open('https://realfiles.vercel.app', '_blank')">realFILES</div>
+  <div class="app-button" onclick="window.open('https://real-ai-khaki.vercel.app/', '_blank')">realAI</div>
+</div>
 
-      // Construct the URL for embedding
-      const encodedQuery = encodeURIComponent(query);
-      const embedUrl = `https://realweb-sand.vercel.app/embed.html#https://${encodedQuery}`;
+<script>
+  const input = document.getElementById('universalSearch');
 
-      // Call function to open in a new 'about:blank' window with iframe
-      openEmbedded(embedUrl);
+  function handleSearch() {
+    let query = input.value.trim();
+    if (!query) return;
+
+    const encodedQuery = encodeURIComponent(query);
+    const embedUrl = `https://realweb-sand.vercel.app/embed.html#https://${encodedQuery}`;
+
+    openEmbedded(embedUrl);
+  }
+
+  function openEmbedded(url) {
+    const newWindow = window.open('about:blank', '_blank');
+    newWindow.document.write(`
+      <html>
+      <head>
+        <title>New Tab</title>
+        <style>
+          body, html { margin:0; padding:0; height:100%; overflow:hidden; }
+          iframe { width:100%; height:100%; border:none; }
+        </style>
+      </head>
+      <body>
+        <iframe src="${url}"></iframe>
+      </body>
+      </html>
+    `);
+    newWindow.document.close();
+  }
+
+  // For the top buttons
+  function openInEmbed(siteUrl) {
+    const embedUrl = `https://realweb-sand.vercel.app/embed.html#${siteUrl}`;
+    openEmbedded(embedUrl);
+  }
+
+  // Search on Enter
+  input.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      handleSearch();
     }
-
-    function openEmbedded(url) {
-      const newWindow = window.open('about:blank', '_blank');
-      newWindow.document.write(`
-        <html>
-        <head>
-          <title>New Tab</title>
-          <style>
-            body, html { margin:0; padding:0; height:100%; overflow:hidden; }
-            iframe { width:100%; height:100%; border:none; }
-          </style>
-        </head>
-        <body>
-          <iframe src="${url}"></iframe>
-        </body>
-        </html>
-      `);
-      newWindow.document.close();
-    }
-
-    // Trigger search on Enter key
-    input.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        handleSearch();
-      }
-    });
-  </script>
+  });
+</script>
 
 </body>
 </html>
